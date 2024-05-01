@@ -1,0 +1,208 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="{% static '/style.css' %}">
+  <title>Bhavana Parab</title>
+</head>
+
+<body>
+  <nav>
+    <a href="#" class="logo">B.</a>
+    <ul>
+      <li><a href="#About">About</a></li>
+      <li><a href="#Skills">Skills</a></li>
+      <li><a href="#Experience">Experience</a></li>
+      <li><a href="{% url 'project_view' %}">Projects</a></li>
+      <li><a href="#Contact">Contact</a></li>
+    </ul>
+    <div class="download">
+      <a href="https://shorturl.at/hC147">Resume <i class="fa-solid fa-download"></i></a>
+    </div>
+    <div class="toggle">
+      <i class="fa-solid fa-bars ham"></i>
+      <!-- <i class="fa-solid fa-xmark ham"></i> -->
+    </div>
+  </nav>
+
+  <div class="mobmenu">
+    <ul>
+      <li><a href="#About">About</a></li>
+      <li><a href="#Skills">Skills</a></li>
+      <li><a href="#Experience">Experience</a></li>
+      <li><a href="{% url 'project_view' %}">Projects</a></li>
+      <li><a href="#Contact">Contact</a></li>
+      <li><a href="https://shorturl.at/hC147" target="_blank">Resume <i class="fa-solid fa-download"></i></a></li>
+  </div>
+
+  
+  <div id="about">
+    <div class="about-content">
+      <div class="text">
+        <p class="intro">
+          Hello I am <b>Bhavana</b> <br><b>Fullstack web Developer</b> <br> Based in <b>india</b>
+        </p>
+        {% for i in home %}
+        <p class="p1">{{i.description}}</p>
+        {% endfor %}
+        <div class="social">
+          <a href="https://github.com/bhavanaa00" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/bhavana-parab-7103a6217/" target="_blank"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/bhavanaa00/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="about-img"><img src="{% static 'media/girl-banner.webp' %}" alt=""></div>
+    </div>
+  </div>
+
+  <div id="Skills">
+    <div class="skill-content">
+      <p class="skill-head">
+        my <b>skills</b>
+      </p>
+      <div class="container">
+        {% for i in skills %}
+        <div class="i">
+          <i class="{{ i.icon }}"></i>
+          <p>{{ i.name }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div id="projects">
+    <p class="pro-head">
+      My <b>Projects</b>
+    </p>
+
+    {% for i in project %}
+    {% if not forloop.counter|divisibleby:2 %}
+    <div class="pro-content-one ">
+      <img src="{{ i.image.url }}" alt="">
+      <div class="proright">
+        <h2>{{ i.title }}</h2>
+        <p>{{ i.description }}</p>
+        <a href="{{ i.link }}" target="_blank"><i
+            class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </div>
+
+    <!-- <hr style="width: 100%; border-color: rgb(186, 169, 169);"> -->
+    {% else %}
+    <div class="pro-content-two">
+      <div class="proleft">
+        <h2>{{ i.title }}</h2>
+        <p>{{ i.description }}</p>
+        <a href="{{ i.link }}" target="_blank"><i
+            class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+      <img src="{{ i.image.url }}" alt="">
+    </div>
+    <!-- <hr style="width: 100%; border-color: rgb(186, 169, 169);"> -->
+    {% endif %}
+    {% endfor %}
+    <div class="more">
+      <a href="{% url 'project_view' %}">View All</a>
+    </div>
+
+  </div>
+
+  <div id="Experience">
+    <div class="exp-container">
+      <p class="exp-head">
+        Work <b>History</b>
+      </p>
+      {% for i in work %}
+      <div class="exp">
+        <div class="head">
+          <h4>{{ i.heading }}</h4>
+          <h6>{{ i.status }}</h6>
+        </div>
+        <p> {{ i.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div id="About">
+    <div class="About-content">
+      <div class="ab-content">
+        <div class="left">
+          <img src="{% static 'media/abt-me.webp' %}" alt="about me">
+        </div>
+        
+        <div class="right">
+          <p class="exp-head">
+            About <b>Me</b>
+          </p>
+          {% for i in about %}
+          <p class="para">{{ i.p1 }}
+            <br><br>
+            {{ i.p2 }}
+            <br><br>
+            {{ i.p3 }}
+          </p>
+          {% endfor %}
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div id="Contact">
+    <div class="contact-info">
+      <form action="/" class="form" name="data-sheet" method="POST">
+        {% csrf_token %}
+        <div class="name">
+          <input type="text" placeholder="Your Name" name="name" required>
+        </div>
+        <div class="email">
+          <input type="email" placeholder="Your Email" name="email" required>
+        </div>
+        <div class="text1">
+          <textarea id="" placeholder="How can I help?" name="message"></textarea>
+        </div>
+
+        <div class="btns">
+          <input type="submit" value="Get in touch" name="submit">
+          <a href="https://github.com/bhavanaa00" target="_blank"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/bhavana-parab-7103a6217/" target="_blank"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/bhavanaa00/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+
+      </form>
+      <div class="right" style="margin-bottom: 30px;">
+        {% for i in contact %}
+        <h1>{{ i.heading }}</h1>
+        <p>{{ i.description }}</p>
+        <h3>{{ i.email }}<br>{{ i.number }}</h3>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="container-footer">
+      <p>Thank You for visiting.</p>
+    </div>
+  </div>
+
+  <script src="{% static '/index.js' %}"></script>
+
+</body>
+
+</html>
